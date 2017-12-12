@@ -77,7 +77,7 @@ public class ColorBlobDetector {
         double[] xx = new double[3];
         double[] yy = new double[3];
         int a = 0;
-        for (int z = 0; z < circlesList.size(); z += circlesList.size() / 3) {
+        for (int z = 0; z < circlesList.size(); z += circlesList.size() / 3) { //pega o primeiro, do meio, e ultimo pontos
             xx[a] = circlesList.get(z).x;
             yy[a] = circlesList.get(z).y;
             a++;
@@ -86,14 +86,14 @@ public class ColorBlobDetector {
             }
         }
 
-        byte cor[] = new byte[3];
+        byte cor[] = new byte[3]; // seleciona a cor vermelha para a linha da curva
         cor[0] = 0;
         cor[1] = 0;
         cor[2] = (byte) 255;
 
-        PolynomialFunctionNewtonForm funcao = new DividedDifferenceInterpolator().interpolate(xx, yy);
+        PolynomialFunctionNewtonForm funcao = new DividedDifferenceInterpolator().interpolate(xx, yy); // manda para o metodo de interpolacao
 
-        for (int z = 0; z < img.size().width; z++) {
+        for (int z = 0; z < img.size().width; z++) { //gera a curva na imagem
             double val = funcao.value(z);
             if (val < img.size().height) {
                 img.put((int) val, z, cor);

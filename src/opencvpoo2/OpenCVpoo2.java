@@ -27,7 +27,7 @@ public class OpenCVpoo2 {
     public static void main(String[] args) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        VideoCapture clipe = new VideoCapture("S2.mp4");
+        VideoCapture clipe = new VideoCapture("poo2.mp4"); //seleciona o video
 
         System.out.println(clipe.isOpened());
         Mat m = new Mat();
@@ -40,14 +40,14 @@ public class OpenCVpoo2 {
 
         for (int i = 0; i < framesContador; i++) {
             clipe.read(m);
-            ColorBlobDetector.circles(m);
+            ColorBlobDetector.circles(m); //le frame a frame e passa pelo metodo de reconhecimento de circulo
         }
 
-        m = imgList.get(imgList.size() / 2);
+        m = imgList.get(imgList.size() / 2); //seleciona um com circulo para gerar a imagem da previsão final
 
-        ColorBlobDetector.geraCurva(m);
+        ColorBlobDetector.geraCurva(m); // gera a curva
 
-        ShowWindow.mostra("Final", m);
+        ShowWindow.mostra("Final", m); // mostra a imagem final
     }
 
 }
